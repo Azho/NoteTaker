@@ -1,0 +1,45 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="NoteTaker">
+<head>
+    <title>Keybinds</title>
+
+    <link href="Content/Site.css" rel="stylesheet" />
+
+</head>
+
+<body ng-controller="KeybindController as vm" ng-cloak>
+
+
+    <form ng-submit="vm.add()">
+        <div>
+            <label>
+                Modifier: <input ng-model="vm.newKeybind.modifier" />
+            </label>
+        </div>
+        <div>
+            <label>
+                Key: <input ng-model="vm.newKeybind.key" />
+            </label>
+        </div>
+        <div>
+            <label>
+                Description: <input ng-model="vm.newKeybind.description" />
+            </label>
+        </div>
+    </form>
+
+    <table>
+        <tr ng-repeat="keybind in vm.keybinds">
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+
+    <script src="Scripts/angular.min.js"></script>
+    <script src="Scripts/angular-resource.min.js"></script>
+    <script src="Scripts/ngApp/Keybinds/app.js"></script>
+    <script src="Scripts/ngApp/Keybinds/controller.js"></script>
+
+</body>
+</html>

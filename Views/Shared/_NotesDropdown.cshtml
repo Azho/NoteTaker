@@ -1,0 +1,25 @@
+﻿@model IEnumerable<NoteTakerApplication.Models.Note>
+
+
+@foreach (var item in Model)
+{
+    <li role="presentation">
+        <table>
+            <tr>
+                <td>
+                    <a role="menuitem" href="/Notes/Index">@Html.DisplayFor(modelItem => item.Title)</a>
+                </td>
+                <td>
+                    <a href="Notes/Edit"><img src="http://img02.deviantart.net/59e4/i/2015/135/1/0/edit_by_azho-d8thntc.png" /></a>
+                </td>
+                <td>
+                    <a href="Notes/Delete"><img src="http://img09.deviantart.net/22d0/i/2015/135/6/0/trash_by_azho-d8thneg.png"></a>
+                </td>
+
+                @*<a role="menuitem" tabindex="-1" href="/Notes/Index"> Index </a> |
+                    <a href="/Notes/Edit"><img src="http://img02.deviantart.net/59e4/i/2015/135/1/0/edit_by_azho-d8thntc.png" /></a> |
+                    <a href="/Notes/Delete"><img src="http://img09.deviantart.net/22d0/i/2015/135/6/0/trash_by_azho-d8thneg.png" /></a>*@
+            </tr>
+        </table>
+    </li>
+}

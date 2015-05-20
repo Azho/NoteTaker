@@ -1,0 +1,56 @@
+﻿@model IEnumerable<NoteTakerApplication.ViewModels.SearchDetailViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Shorthand Results</h2>
+
+@if (Model != null)
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.resultTitle)
+            </th>
+           
+            <th>
+                @Html.DisplayNameFor(model => model.Author)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.Description)
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.TimesSaved)
+            </th>
+
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a href="/Search/NotesView/@item.resultId">@Html.DisplayFor(modelItem => item.resultTitle)</a>
+                </td>
+                
+                <td>
+                    By <a href="/Search/FullView/@item.Author">@Html.DisplayFor(modelItem => item.Author)</a>
+                </td>
+                
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.TimesSaved)
+                </td>
+                
+            </tr>
+        }
+
+
+    </table>
+}
+

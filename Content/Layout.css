@@ -1,0 +1,58 @@
+﻿.holder {
+    position: relative;
+}
+
+.tab {
+    position: absolute;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    top: -50px;
+}
+
+#search {
+    background-color: dimgrey;
+    border-radius: 10px;
+    height: 40px;
+    width: 300px;
+    border: 2px solid grey;
+    box-shadow: 2px 2px 2px black;
+    text-align: left;
+    padding-top: 8px;
+}
+
+#login {
+    background-color: #993333;
+    border-radius: 10px;
+    height: 40px;
+    border: 2px solid indianred;
+    box-shadow: 2px 2px 2px black;
+    padding-top: 8px;
+    /*width: 85px;*/
+}
+
+#shorthand, #notes {
+    background-color: dimgrey;
+    border-radius: 10px;
+    height: 40px;
+    width: 150px;
+    border: 2px solid grey;
+    box-shadow: 2px 2px 2px black;
+    padding-top: 8px;
+}
+
+.tab a {
+    color: white;
+}
+
+.button-drop-down li{
+    list-style-type:none;
+}
+
+.button-drop-down li a{
+    color:black;
+}
+
+.well a{
+    color:black;
+}

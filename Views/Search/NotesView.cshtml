@@ -1,0 +1,53 @@
+﻿@model IEnumerable<NoteTakerApplication.ViewModels.NoteViewModel>
+
+@{
+    ViewBag.Title = "NotesView";
+}
+
+<h2>NotesView</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Content)
+        </th>
+        
+
+        
+        @*<th>
+            @Html.DisplayNameFor(model => model.TimesSaved)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Report)
+        </th>*@
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Content)
+        </td>
+        
+        
+        @*<td>
+            @Html.DisplayFor(modelItem => item.TimesSaved)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Report)
+        </td>*@
+       
+    </tr>
+    <tr>
+        <td></td>
+        <td><a href="/Notes/Save/@item.Id">Add To My Notes</a> | Report</td>
+    </tr>
+}
+
+</table>

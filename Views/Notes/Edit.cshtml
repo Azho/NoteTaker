@@ -1,0 +1,126 @@
+﻿@model NoteTakerApplication.Models.Note
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<form id="notesFrm">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Note</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--Rich Text Editor-->
+        <div>
+            <div id="toolbar"></div>
+            <div id="content-editor" class="clear">
+                <input type="hidden" id="notesContent" />
+            </div>
+        </div>
+
+        @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", placeholder = "Separate tag names by space." } })
+            @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+
+            <br />
+            <label>Published: </label>
+            @Html.RadioButtonFor(model => model.Published, true)
+            <label>Private: </label>
+            @Html.RadioButtonFor(model => model.Published, false)
+
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+    <input type="hidden" />
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section scripts {
+
+
+    <script>
+
+
+        //Passing over text editor content.
+        var noteModel = @Html.Raw(Json.Encode(Model));
+        $('#content-editor').html(noteModel.Content);
+
+
+        //Passing to edit controller
+        var frm = document.getElementById('notesFrm');
+        var title = document.getElementById('Title');
+        var description = document.getElementById('Description');
+        var content = document.getElementById('content-editor');
+        var tags = document.getElementById('Tags');
+
+        //var published = $('input[name="Published"]:checked');
+
+        //document.getElementsByName('Published');
+
+        // Handle form submit
+        $('form').submit(function (e) {
+            $('#notesContent').val(content);
+            e.preventDefault();
+            var published = $('input[name="Published"]:checked')[0];
+
+            // create payload
+            var note = {
+                Title: title.value,
+                Description: description.value,
+                Content: $(content).html(),
+                Tags: tags.value,
+                Published: published.value == "True" ? true : false
+            };
+            console.log(note);
+
+            $.ajax('/Notes/Edit/' + noteModel.Id, {
+                type: 'POST',
+                data: JSON.stringify(note),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    e.target.reset();
+                    window.location = "/Notes/Index";
+                    alert('Saved!');
+                },
+                error: function (data) {
+                    alert("Notes could not be saved.");
+                }
+            });
+        });
+
+
+    </script>
+}

@@ -1,0 +1,101 @@
+﻿@model NoteTakerApplication.Models.Note
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+@*@using (Html.BeginForm())*@
+<form id="notesFrm">
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <!--Rich Text Editor-->
+
+        <div>
+            <div id="toolbar"></div>
+            <div id="content-editor" class="clear" name="Content">
+                Click here to begin your notes!
+            </div>
+        </div>
+
+        @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", placeholder = "Separate tag names by space." } })
+            @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+        </div>
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+
+
+@section scripts {
+    <script>
+
+        var frm = document.getElementById('notesFrm');
+        var title = document.getElementById('Title');
+        var description = document.getElementById('Description');
+        var content = document.getElementById('content-editor');
+        var tags = document.getElementById('Tags');
+
+        // handle form submit
+        frm.addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            // create payload
+            var note = {
+                Title: title.value,
+                Description: description.value,
+                Content: $(content).html(),
+                Tags: tags.value
+            };
+
+            $.ajax('/Notes/Create', {
+                type: 'POST',
+                data: JSON.stringify(note),
+                contentType: 'application/json',
+                dataType: 'json',
+                success: function (data) {
+                    e.target.reset();
+                    window.location = "/Notes/Index";
+                    alert('Saved!');
+                },
+                error: function (data) {
+                    alert("Notes could not be saved.");
+                }
+            });
+
+        });
+
+
+    </script>
+}
+
+
+

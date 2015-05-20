@@ -1,0 +1,44 @@
+﻿@model NoteTakerApplication.ViewModels.ViewAuthorViewModel
+
+@{
+    ViewBag.Title = "FullView";
+}
+
+
+<div>
+    <h4>About the Author</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName) @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            About the Author:
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.About)
+        </dd>
+
+    </dl>
+</div>
+
+<div>
+    <table>
+        @foreach (var item in Model.UserNotes)
+        {
+            <tr class="authorNote">
+                <td>@item.Title</td>
+            </tr>
+        }
+    </table>
+</div>
+<hr />
+<p>
+    @Html.ActionLink("Back", "Index")
+</p>

@@ -1,0 +1,140 @@
+﻿@model IEnumerable<NoteTakerApplication.Models.Note>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Modal -->
+<div class="modal fade" id="deleteNote" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Confirm</h4>
+            </div>
+            <div class="modal-body">
+                Are you sure? Deleted notes cannot be recovered.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" id="deleteNoteReally" class="btn btn-danger" data-dismiss="modal">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+    <script>
+        $('.deleteButton').click(function (e) {
+            e.preventDefault();
+            $('#deleteNote').modal('show');
+            var id = $(this).data('id');
+            $('#notekiller').val(id);
+
+        });
+
+        $('#deleteNoteReally').click(function () {
+
+            var id = $('#notekiller').val();
+
+            $.post('@Url.Action("Delete", "Notes")', { id: id }).done(function () {
+                location.reload();
+            }).fail(function () {
+                alert('Notes could not be saved.');
+            });
+
+        });
+    </script>
+}
+
+
+
+
+
+
+<h2>Index</h2>
+
+<table class="table">
+
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        @*<th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Published)
+        </th>
+        <th colspan="2"></th>
+       
+
+
+    </tr>
+
+    @Html.Hidden("notekiller", "", new { @id = "notekiller" })
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>*@
+            @if (item.Author == this.User.Identity.Name)
+            {
+                <td>
+                    Me
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Author)
+                </td>
+            }
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            @if (item.Published == true)
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Published)  Yes
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.Published)  No
+                </td>
+            }
+
+            <td>
+                @*<a href="@Url.Action("Edit", "Notes")" id="@item.Id">
+                        <img src="@Url.Content("http://orig02.deviantart.net/7967/f/2015/137/0/d/edit2_by_azho-d8toliy.png")" />
+                    </a>*@
+                @Html.ActionLink("Edit", "Edit", new { @class = "editButton", id = item.Id })
+            </td>
+            <td>
+                <button class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteNote" data-id="@item.Id">Delete</button>
+               
+            </td>
+        </tr>
+    }
+    <tr>
+        <td colspan="2">
+            @Html.ActionLink("Start A New Note", "Create")
+        </td>
+    </tr>
+
+</table>
