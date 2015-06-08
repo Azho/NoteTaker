@@ -4,105 +4,122 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
 
-    <!--Rich Text Editor CSS-->
-    @*<link href="~/Content/bootstrap.css" rel="stylesheet" />*@
-    <link href="~/Content/farbastic.css" rel="stylesheet" />
-    <link href="~/Content/freshereditor.css" rel="stylesheet" />
+    @*@Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")*@
+    <link href="~/Content/tags/tags.css" rel="stylesheet" />
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="~/Scripts/tags/tags.js"></script>
+    <script src="~/Scripts/modals.js"></script>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/simple-sidebar.css" rel="stylesheet" />
+    <link href="~/Content/site.css" rel="stylesheet" />
+    
+
+    @*Summernote*@
+
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" />
+    <link href="~/Content/summernote.css" rel="stylesheet" />
+    <script src="~/Scripts/summernote/summernote.min.js"></script>
+    <script src="~/Scripts/script.js"></script>
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+    <nav class="navbar navbar-inverse navbar-fixed-top container-fluid">
+        <div class="container-fluid">
             <div class="navbar-header">
-                <a href="/Notes/Create"><img src="http://img10.deviantart.net/738e/i/2015/113/5/6/notetaker_by_azho-d8qsiyj.png" style="height:60px" /></a>
-
+                <a href="/Home/Index"><img src="http://orig03.deviantart.net/8ba2/f/2015/147/e/e/notetaker2_by_azho-d8uyiu5.png" style="height:50px" /></a>
             </div>
-            <div class="navbar-collapse collapse">
-
+            <div style="margin-right:20px">
                 <ul class="nav navbar-nav navbar-right">
-
+                    <li class="active"><a href="#menu-toggle" id="menu-toggle">Search</a></li>
+                    <li><a href="/Notes/Create">New</a></li>
+                    <li><a href="/Notes/Index">My Notes</a></li>
                     <li>
-                        <div id="notes" class="btn btn-default"><a href="/Notes/Index">My Notes</a></div>
+                        @Html.Partial("_LoginPartial")
                     </li>
 
-                    
 
-                    @*<li>
-                        <div id="shorthand" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="true">Shorthands</div>
-                        <ul class="dropdown-menu" role="menu">
-
-                            <li role="presentation">
-                                <a role="menuitem" tabindex="-1" href="/Shorthands/Index"> Index </a> |
-                                <a href="/Shorthands/Edit"><img src="http://img02.deviantart.net/59e4/i/2015/135/1/0/edit_by_azho-d8thntc.png" /></a> |
-                                <a href="/Shorthands/Delete"><img src="http://img09.deviantart.net/22d0/i/2015/135/6/0/trash_by_azho-d8thneg.png" /></a>
-                            </li>
-                            <li>
-                                <a href="/Shorthands/Create">New</a>
-                            </li>
-                        </ul>
-                    </li>*@
-                    <li>
-                        <div class="login">
-                            @Html.Partial("_LoginPartial")
-                        </div>
-                    </li>
                 </ul>
-
             </div>
         </div>
+    </nav>
+
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+
+                    <div style="margin-top: 20px; margin-left:7px">
+                        <h4 style="color:grey">Search Published Notes</h4>
+                    </div>
+                    <div>
+                        <form action="/search" method="post">
+                            <div class="col-md-12">
+                                <table>
+                                    <tr>
+                                        <td colspan="2">
+                                            <input placeholder="Search by..." class="form-control" name="SearchPhrase" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td width="200px">
+                                            <select class="form-control" name="Type">
+                                                <option value="Title">Title</option>
+                                                <option value="Tags">Tags</option>
+                                                <option value="Author">Author</option>
+                                            </select>
+                                        </td>
+                                        <td>
+                                            <input type="submit" class="btn" value="Go!" style="border-radius:10%; background-color:aliceblue" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div colspan="12">
+
+                    </div>
+                </li>
+
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+        <!-- Page Content -->
+        <div id="page-content-wrapper">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /#page-content-wrapper -->
+
     </div>
-
-
-    <div class="container body-content">
-        <!--I'd like an angular search.-->
-        <div id="search" class="col-md-5" style="top:6px">
-            <form action="/search" method="post">
-                <div class="col-sm-6">
-                    <input class="form-control" name="SearchPhrase" />
-                </div>
-                <div class="col-sm-3">
-                    <select class="form-control" name="Type">
-                        <option value="Title">Title</option>
-                        <option value="Tags">Tags</option>
-                        <option value="Author">Author</option>
-                    </select>
-                </div>
-
-                <div class="col-sm-3">
-                    <input type="submit" class="btn" value="Search" />
-                </div>
-            </form>
-        </div>
-        <!--Angular return-->
-        <div id="results">
-
-        </div>
-        <div style="padding:30px; margin-top:50px;">
-            @RenderBody()
-        </div>
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    <!-- /#wrapper -->
+    <!-- Menu Toggle Script -->
+    <!-------------------------------------------------------------->
     <!--Rich Text Editor Scripts-->
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="~/Scripts/RichText/shortcut.js"></script>
-    <script src="~/Scripts/RichText/farbastic.js"></script>
-    <script src="~/Scripts/RichText/dropdown.js"></script>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/RichText/freshereditor.js"></script>
-    <script src="~/Scripts/RichText/richtext.js"></script>
+    @*
+        <script src="~/Scripts/RichText/shortcut.js"></script>
+        <script src="~/Scripts/RichText/farbastic.js"></script>
+        <script src="~/Scripts/RichText/dropdown.js"></script>
+        <script src="~/Scripts/bootstrap.js"></script>
+        <script src="~/Scripts/script.js"></script>
+        <script src="~/Scripts/RichText/freshereditor.js"></script>
+        <script src="~/Scripts/RichText/richtext.js"></script>*@
 
     <!---------------------------->
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/sidebar.js"></script>
     @RenderSection("scripts", required: false)
+
 </body>
 </html>
-
-
-

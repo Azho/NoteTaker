@@ -5,114 +5,26 @@
 <html ng-app="NoteTaker">
 <head>
     <title>NoteTaker</title>
-    <base href="/" />
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <!--Layout style-->
-    @*<link href="~/Content/Layout.css" rel="stylesheet" />*@
+   
 </head>
 
-<body>
-    <!--Header Here-->
-    @*<div class="navbar navbar-inverse navbar-fixed-top" id="banner">
-       
-        <div class="navbar-collapse collapse">
-            <a href="/Home/Index" class="pull-left"><img src="http://img10.deviantart.net/738e/i/2015/113/5/6/notetaker_by_azho-d8qsiyj.png" style="height:60px" /></a>
-        </div>
+<body style="background-image: url('http://lpcexpressnews.com/wp-content/uploads/2013/02/EMptyClassroom1-1024x768.jpg') ">
 
-        <div class="holder">
-            <div class="tab" style="right:490px">
-                <div id="search">
-                    <form action="/search" method="get">
-                        <div class="col-xs-5">
-                            <select class="form-control" name="Type">
-                                <option value="Title">Title</option>
-                                <option value="Tags">Tags</option>
-                                <option value="Author">Author</option>
-                            </select>
-                        </div>
-                        <div class="col-xs-5">
-                            <input class="form-control" name="SearchPhrase" />
-                        </div>
-                        <div class="col-xs-2">
-                            <input type="submit" class="btn" value="Search" />
-                        </div>
-                    </form>
-                </div>
-                <div id="searchResult">*@<!--Results will appear here.-->@*</div>
-            </div>
-            <div class="tab" style="right:300px" ng-controller="CollapseTabs" ng-mouseenter="isCollapsed = !isCollapsed" ng-mouseleave="isCollapsed = !isCollapsed">
-                <div id="notes"><a href="/notes/index">My Notes</a></div>
-                <div collapse="!isCollapsed">
-                    <div class="well well-lg" style="color:black;">
-                        
-                        <ul>
-                            <li></li>
-                        </ul>*@
-                        <!--list--> <!--Delete action-->
-                        <!--Display note names, clicking goes to -->
-                    
-                    
-                    @*</div>
-                </div>
-            </div>
+    <h1>Welcome to NoteTaker</h1>
+    <div class="col-md-6" style="padding:20px;">
+        <p>NoteTaker is a site for sharing digital and hard copy notes. Its quick-access design allows you to log in and begin note taking immediately. Your finished notes can then be published, viewed, and modified by other users, letting you share notes more easily with your friends and classmates.</p>
+        <p>To begin, click the link below.</p>
 
-            <div ng-controller="CollapseTabs" ng-mouseenter="isCollapsed = !isCollapsed" ng-mouseleave="isCollapsed = !isCollapsed" class="tab" style="right:135px">
-                <div id="shorthand"><a href="/shorthands">My Shorthand</a></div>
-                <div collapse="!isCollapsed" ng-controller="ShorthandsController as vm">
-                    <div class="well well-lg" style="color:black;">*@
-
-                        @*Angular attempt*@
-                        @*<ul class="button-drop-down">
-                            <li ng-repeat="shorthand in vm.shorthands">
-                                <a ng-href="/Shorthands/Edit/{{shorthand.Id}}">{{shorthand.Title}}</a>
-                                <a ng-href="/Home/Index" ng-click="vm.remove(shorthand)">Remove</a>
-                            </li>
-                        </ul>
-                        <hr />
-                        <p><a href="/Shorthands/Create">New</a></p>*@
-                        @*
-                    Problem:
-                    These divs move when their contents
-                    get too big. I need to keep them stationary and
-                    wrapped to fit content.*@
-                    @*</div>
-                    <pre>{{vm | json}}</pre>
-                </div>
-            </div>
-
-            <div class="tab" style="right:35px">
-                <div id="login">@Html.Partial("_LoginPartial")</div>
-                <div id="shorthandResult">*@<!--Results will appear here.-->@*</div>
-            </div>
-        </div>
-    </div>*@
-
-
-    <div class="row">
+        <div class="row">
             <div class="col-md-6">
-                <a href="/Notes/Create"><h2>New Note Page</h2></a>
+                <a href="/Notes/Create"><h3>New Note Page</h3></a>
             </div>
-           
+
         </div>
+    </div>
 
 
-    <footer>
-        &copy; 2015 by the Company
-    </footer>
-    @*Rich Text Editor requirements here*@
-    @*<script type="text/javascript" src="src/js/libs/jquery-1.10.2.min.js"></script>
-    <script type="text/javascript" src="src/js/jquery.notebook.js"></script>*@
-
-    @*AngularJS *@
-    @*<script src="~/Scripts/angular.js"></script>
-    <script src="~/Scripts/angular-resource.js"></script>
-    <script src="//angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.13.0.js"></script>
-    
-    <script src="~/Scripts/ngApp/app.js"></script>
-    <script src="~/Scripts/ngApp/controller.js"></script>
-    <script src="~/Scripts/ngApp/ShorthandsApp/app.js"></script>
-    <script src="~/Scripts/ngApp/ShorthandsApp/controller.js"></script>*@
-
+   
 </body>
 </html>
 

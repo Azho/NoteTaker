@@ -25,15 +25,15 @@ namespace NoteTakerApplication.Controllers
 
             if (search.Type == "Title")
             {
-                searchReturn = (from m in _repo.Query<Note>() where m.Title.ToLower().Contains(search.SearchPhrase.ToLower()) && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, TimesSaved = m.TimesSaved }).ToList();
+                searchReturn = (from m in _repo.Query<Note>() where m.Title.ToLower().Contains(search.SearchPhrase.ToLower()) && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, Description = m.Description, TimesSaved = m.TimesSaved }).ToList();
             }
             else if (search.Type == "Tags")
             {
-                searchReturn = (from m in _repo.Query<Note>() where m.Tags.ToLower().Contains(search.SearchPhrase.ToLower()) && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, TimesSaved = m.TimesSaved }).ToList();
+                searchReturn = (from m in _repo.Query<Note>() where m.Tags.ToLower().Contains(search.SearchPhrase.ToLower()) && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, Description = m.Description, TimesSaved = m.TimesSaved }).ToList();
             }
             else if (search.Type == "Author")
             {
-                searchReturn = (from m in _repo.Query<Note>() where m.Author.ToLower() == search.SearchPhrase.ToLower() && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, TimesSaved = m.TimesSaved }).ToList();
+                searchReturn = (from m in _repo.Query<Note>() where m.Author.ToLower() == search.SearchPhrase.ToLower() && m.Published == true orderby m.TimesSaved descending select new SearchDetailViewModel { resultId = m.Id, resultTitle = m.Title, Author = m.Author, Description = m.Description, TimesSaved = m.TimesSaved }).ToList();
             }
             else
             {

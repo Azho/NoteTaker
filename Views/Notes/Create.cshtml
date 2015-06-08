@@ -4,16 +4,15 @@
     ViewBag.Title = "Create";
 }
 
-
-
-@*@using (Html.BeginForm())*@
-<form id="notesFrm">
-
+<h2>Create Note</h2>
+<hr />
+@using (Html.BeginForm())
+{
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <hr />
+    <div class="form-horizontal" style="margin:20px; margin-top:30px">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -31,18 +30,17 @@
         </div>
 
         <!--Rich Text Editor-->
-
-        <div>
-            <div id="toolbar"></div>
-            <div id="content-editor" class="clear" name="Content">
-                Click here to begin your notes!
-            </div>
+        <div class="form-group">
+            <textarea id="summernote" name="Content" style="background-color:aliceblue"></textarea>
         </div>
 
-        @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "form-control", placeholder = "Separate tag names by space." } })
-            @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+        <div class="form-group">
+
+            @Html.LabelFor(model => model.Tags, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Tags, new { htmlAttributes = new { @class = "tags" } })
+                @Html.ValidationMessageFor(model => model.Tags, "", new { @class = "text-danger" })
+            </div>
         </div>
         <br />
 
@@ -52,48 +50,17 @@
             </div>
         </div>
     </div>
-</form>
-
+    
+    
+}
 
 @section scripts {
     <script>
-
-        var frm = document.getElementById('notesFrm');
-        var title = document.getElementById('Title');
-        var description = document.getElementById('Description');
-        var content = document.getElementById('content-editor');
-        var tags = document.getElementById('Tags');
-
-        // handle form submit
-        frm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            // create payload
-            var note = {
-                Title: title.value,
-                Description: description.value,
-                Content: $(content).html(),
-                Tags: tags.value
-            };
-
-            $.ajax('/Notes/Create', {
-                type: 'POST',
-                data: JSON.stringify(note),
-                contentType: 'application/json',
-                dataType: 'json',
-                success: function (data) {
-                    e.target.reset();
-                    window.location = "/Notes/Index";
-                    alert('Saved!');
-                },
-                error: function (data) {
-                    alert("Notes could not be saved.");
-                }
+        $(function() {
+            $('#Tags').tagsInput({ 
+                'delimiter': [',', ';'],
             });
-
         });
-
-
     </script>
 }
 

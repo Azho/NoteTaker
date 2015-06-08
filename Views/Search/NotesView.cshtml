@@ -3,51 +3,35 @@
 @{
     ViewBag.Title = "NotesView";
 }
+@foreach (var item in Model)
+{
+    <h2>@item.Title</h2>
 
-<h2>NotesView</h2>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Title)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Content)
-        </th>
-        
+    <div id="content" style="margin:20px; margin-top:30px; padding:50px; border-radius:10px; background-color:white; border:solid 2px grey;">@Html.Raw(item.Content)</div>
 
-        
-        @*<th>
-            @Html.DisplayNameFor(model => model.TimesSaved)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Report)
-        </th>*@
-        <th></th>
-    </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Title)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Content)
-        </td>
-        
-        
-        @*<td>
-            @Html.DisplayFor(modelItem => item.TimesSaved)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Report)
-        </td>*@
-       
-    </tr>
-    <tr>
-        <td></td>
-        <td><a href="/Notes/Save/@item.Id">Add To My Notes</a> | Report</td>
-    </tr>
+    <form action="/Notes/Save/@item.Id" method="post">
+
+        <div style="margin:20px; margin-top:30px;"><input type="submit" value="Save to My Notes" class="btn btn-default" /></div>
+
+    </form>
+
 }
 
-</table>
+
+
+
+    @section scripts{
+        <script>
+            //How do I get the html to not show up until it's done encoding?
+            @*var noteModel = @Html.Raw(@item.);
+            $('#content').html(noteModel[0].Content);*@
+
+        </script>
+    }
+
+
+
+
+

@@ -31,7 +31,6 @@ namespace NoteTakerApplication.Controllers
         public ActionResult Index()
         {
             //Thing .UserName = username;
-            // There is 
             var userId = this.User.Identity.GetUserId();
             var notes = (from m in _repo.Query<User_Note>().Include(m => m.Note) where m.UserId == userId select m.Note).ToList();
             if (notes != null)
@@ -79,7 +78,7 @@ namespace NoteTakerApplication.Controllers
                     UserId = this.User.Identity.GetUserId()
                 });
                 _repo.SaveChanges();
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet );
+                return RedirectToAction("Index");
             }
             return View();
         }
@@ -110,8 +109,8 @@ namespace NoteTakerApplication.Controllers
                 original.Published = note.Published;
                 
                 _repo.SaveChanges();
-                return Json(new { success = true }, JsonRequestBehavior.AllowGet);
-
+                //return Json(new { success = true }, JsonRequestBehavior.AllowGet);
+                return RedirectToAction("Index");
             } 
             return View();
         }
@@ -164,7 +163,7 @@ namespace NoteTakerApplication.Controllers
 
  
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Save(int id)
         {
             var original = _repo.Find<Note>(id);

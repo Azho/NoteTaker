@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace NoteTakerApplication.Models
 {
@@ -33,6 +34,8 @@ namespace NoteTakerApplication.Models
 
         public string Description { get; set; }
         
+        [DataType(DataType.MultilineText)]
+        [AllowHtml]
         public string Content { get; set; }
 
         public string Username { get; set; }

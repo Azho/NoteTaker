@@ -28,7 +28,6 @@
     <script>
         $('.deleteButton').click(function (e) {
             e.preventDefault();
-            $('#deleteNote').modal('show');
             var id = $(this).data('id');
             $('#notekiller').val(id);
 
@@ -53,7 +52,7 @@
 
 
 
-<h2>Index</h2>
+<h2>Results</h2>
 
 <table class="table">
 
@@ -61,20 +60,24 @@
         <th>
             @Html.DisplayNameFor(model => model.Title)
         </th>
-        @*<th>
-                @Html.DisplayNameFor(model => model.Content)
-            </th>*@
+
         <th>
             @Html.DisplayNameFor(model => model.Author)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Description)
         </th>
+
+        @*<th>
+                @Html.DisplayNameFor(model => model.Content)
+            </th>*@
+
+
         <th>
             @Html.DisplayNameFor(model => model.Published)
         </th>
         <th colspan="2"></th>
-       
+
 
 
     </tr>
@@ -86,9 +89,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            @*<td>
-                    @Html.DisplayFor(modelItem => item.Content)
-                </td>*@
+
             @if (item.Author == this.User.Identity.Name)
             {
                 <td>
@@ -102,9 +103,22 @@
                 </td>
             }
 
+            @if (item.Description == null) 
+            {
+             <td>N/A</td>   
+            }
+            else 
+            { 
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
+            }
+
+            @*<th>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </th>*@
+
+
 
             @if (item.Published == true)
             {
@@ -127,7 +141,7 @@
             </td>
             <td>
                 <button class="btn btn-danger btn-xs deleteButton" data-toggle="modal" data-target="#deleteNote" data-id="@item.Id">Delete</button>
-               
+
             </td>
         </tr>
     }

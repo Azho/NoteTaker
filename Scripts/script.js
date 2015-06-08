@@ -1,4 +1,5 @@
-﻿$(document).ready(function () {
+﻿//summernote
+$(document).ready(function () {
     $('#summernote').summernote();
 });
 

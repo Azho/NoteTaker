@@ -25,71 +25,18 @@ textarea {
 }
 
 /*Custom Navbar Styling*/
-.authorShorthand {
-    border: solid 2px grey;
+
+
+a {
+    color: #333;
 }
 
-.login {
-    background-color: #993333;
-    border-radius: 8px;
-    height: 40px;
-    border: 2px solid indianred;
-    box-shadow: 2px 2px 2px black;
-    padding-top: 8px;
-    margin-top: 10px;
-    padding: 9px;
-    color: white;
+body {
+    background: url('http://lpcexpressnews.com/wp-content/uploads/2013/02/EMptyClassroom1-1024x768.jpg') no-repeat;
+    background-size: 100%;
 }
 
-#shorthand, #notes, #login {
-    background-color: dimgrey;
-    border-radius: 8px;
-    height: 40px;
-    margin-top: 10px;
-    margin-right: 29px;
-    padding: 9px;
-    color: white;
-    border: 2px solid grey;
-    padding-top: 8px;
+a{
+    color:#333;
 }
 
-    #shorthand > a, #notes > a {
-        color: white;
-    }
-
-        #shorthand > a:hover, #notes > a:hover, #login > a {
-            color: antiquewhite;
-        }
-
-#search {
-    border: 2px solid grey;
-    border-radius: 10px;
-    background-color: dimgrey;
-    padding-bottom: 10px;
-    padding-top: 12px;
-}
-
-/*Rich Text Editor styling*/
-#content-editor {
-    margin: 50px 10px 10px 10px;
-}
-
-#toolbar {
-    margin: 10px;
-}
-
-/*a.editButton{
-    background: url(http://orig02.deviantart.net/7967/f/2015/137/0/d/edit2_by_azho-d8toliy.png) no-repeat top;
-    display: block;
-    text-indent: -9999px;
-}*/
-
-a.deleteButton{
-    background: url(http://img09.deviantart.net/22d0/i/2015/135/6/0/trash_by_azho-d8thneg.png) no-repeat top;
-    display: block;
-    text-indent: -9999px;
-}
-
-[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
-  display: none !important;
-}
